@@ -11,7 +11,7 @@ class Dinosaur(Sprite):
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = 80
         self.dino_rect.y = 310
-
+        
     def update(self):
         pass
 
