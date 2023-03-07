@@ -46,7 +46,7 @@ class Dinosaur(Sprite):
         if self.stop_index >=10:
             self.stop_index = 0
     def run(self):
-        self.image = RUNNING[0] if self.stop_index < 5 else RUNNING[1]
+        self.image = RUNNING[0] if self.stop_index // 5 else RUNNING[1]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POST
         self.dino_rect.y = self.Y_POST
@@ -62,7 +62,7 @@ class Dinosaur(Sprite):
             self.dino_jump = False
             self.jump_speed = self.JUMP_SPEED
     def duck(self):
-        self.image = DUCKING[0] if self.stop_index < 5 else DUCKING[1]
+        self.image = DUCKING[0] if self.stop_index // 5 else DUCKING[1]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POST
         self.dino_rect.y = 350

@@ -9,6 +9,7 @@ class Obstacle(Sprite):
         self.rect = self.image[obstacle_type].get_rect()
         self.rect.x = SCREEN_WIDTH
 
+
     def update(self, game_speed, obstacles):
         self.rect.x -= game_speed
 
