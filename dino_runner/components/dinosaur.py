@@ -75,5 +75,6 @@ class Dinosaur(Sprite):
             self.duck_speed = self.DUCK_SPEED 
     def draw(self, screen):  
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y) )
+        
 
 
