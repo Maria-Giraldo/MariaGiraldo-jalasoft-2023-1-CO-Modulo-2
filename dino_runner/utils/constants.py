@@ -17,6 +17,15 @@ RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
 ]
 
+RUNNING_BOY = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRunboy1.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2boy.png")),
+]
+RUNNING_GIRL = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/dinorumgirls1.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/dinorungirls2.png")),
+]
+
 RUNNING_SHIELD = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1Shield.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
@@ -28,12 +37,22 @@ RUNNING_HAMMER = [
 ]
 
 JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJump.png"))
+JUMPING_BOY = pygame.image.load(os.path.join(IMG_DIR, "Dino/Dinojumpboy.png"))
+JUMPING_GIRL = pygame.image.load(os.path.join(IMG_DIR, "Dino/Dinojumpgirl.png"))
 JUMPING_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpShield.png"))
 JUMPING_HAMMER = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpHammer.png"))
 
 DUCKING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2.png")),
+]
+DUCKING_BOY = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuckboy1.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuckboy2.png")),
+]
+DUCKING_GIRL = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuckgirls1.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuckgirls2.png")),
 ]
 
 DUCKING_SHIELD = [
@@ -69,7 +88,7 @@ HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
-
+BG_MENU = pygame.image.load(os.path.join(IMG_DIR, 'Other/BG_inicio.jpeg'))
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 DEFAULT_TYPE = "default"

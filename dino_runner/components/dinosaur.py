@@ -1,17 +1,17 @@
 import pygame
 from pygame.sprite import Sprite
 
-from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING
+from dino_runner.utils.constants import RUNNING_BOY, JUMPING_BOY, DUCKING_BOY
 
 
 class Dinosaur(Sprite):
     X_POST = 80
     Y_POST = 310 
     JUMP_SPEED = 8.5 
-    DUCK_SPEED = 9.5   
+    DUCK_SPEED = 6.5   
 
     def __init__(self):
-        self.image = RUNNING[0]
+        self.image = RUNNING_BOY[0]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POST
         self.dino_rect.y = self.Y_POST
@@ -46,14 +46,14 @@ class Dinosaur(Sprite):
         if self.stop_index >=10:
             self.stop_index = 0
     def run(self):
-        self.image = RUNNING[0] if self.stop_index // 5 else RUNNING[1]
+        self.image = RUNNING_BOY[0] if self.stop_index // 5 else RUNNING_BOY[1]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POST
         self.dino_rect.y = self.Y_POST
         self.stop_index += 1
 
     def jump(self):
-        self.image = JUMPING
+        self.image = JUMPING_BOY
         self.dino_rect.y -= self.jump_speed * 4
         self.jump_speed -= 0.8
 
@@ -62,7 +62,7 @@ class Dinosaur(Sprite):
             self.dino_jump = False
             self.jump_speed = self.JUMP_SPEED
     def duck(self):
-        self.image = DUCKING[0] if self.stop_index // 5 else DUCKING[1]
+        self.image = DUCKING_BOY[0] if self.stop_index // 5 else DUCKING_BOY[1]
         self.dino_rect = self.image.get_rect()
         self.dino_rect.x = self.X_POST
         self.dino_rect.y = 350
