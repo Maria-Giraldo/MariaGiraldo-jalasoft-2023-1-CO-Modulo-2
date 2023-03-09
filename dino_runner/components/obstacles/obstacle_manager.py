@@ -4,12 +4,16 @@ import random
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 
-from dino_runner.utils.constants import  SHIELD_TYPE
+
+
+from dino_runner.utils.constants import  SHIELD_TYPE, FIRE_TYPE, HAMMER_TYPE
 
 
 class ObstacleManager:
   def __init__(self):
     self.obstacles = []
+
+
     
   def generate_obstacle(self, obstacle_type):
     if obstacle_type == 0:
@@ -32,13 +36,19 @@ class ObstacleManager:
       obstacle.update(game.game_speed, self.obstacles)
       
       if game.player.dino_rect.colliderect(obstacle.rect):
-        if game.player.type != SHIELD_TYPE:
+        if game.player.type != FIRE_TYPE and game.player.type != SHIELD_TYPE and game.player.type != HAMMER_TYPE :
+          pygame.mixer.music.load("dino_runner/assets/sounds/soundDeath.mp3")
+          pygame.mixer.music.play()
           pygame.time.delay(1000)
-          game.death_count.update()
+          game.death_count.update(self)
           game.playing = False
           break
+
+
         else:
           self.obstacles.remove(obstacle)
+        
+                
   
   def draw(self, screen):
     for obstacle in self.obstacles:

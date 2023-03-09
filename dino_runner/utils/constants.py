@@ -10,6 +10,7 @@ IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
+ICON_FINAL = pygame.image.load(os.path.join(IMG_DIR, "ICONO_FINAL.png"))
 
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),
@@ -18,8 +19,11 @@ RUNNING = [
 
 RUNNING_SHIELD = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1Shield.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2Shield.png")),
 ]
+RUNNING_FIRE = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1Fire.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2Fire.png")),]
 
 RUNNING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Hammer.png")),
@@ -28,6 +32,7 @@ RUNNING_HAMMER = [
 
 JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJump.png"))
 JUMPING_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpShield.png"))
+JUMPING_FIRE = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpFire.png"))
 JUMPING_HAMMER = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpHammer.png"))
 
 DUCKING = [
@@ -37,7 +42,11 @@ DUCKING = [
 
 DUCKING_SHIELD = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Shield.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2Shield.png")),
+]
+DUCKING_FIRE = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Fire.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2Fire.png")),
 ]
 
 DUCKING_HAMMER = [
@@ -63,6 +72,7 @@ BIRD = [
 
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
 SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
+FIRE = pygame.image.load(os.path.join(IMG_DIR, 'Other/icono_fuego.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
@@ -74,3 +84,7 @@ DEFAULT_TYPE = "default"
 FONT_STYLE = "freesansbold.ttf"
 
 SHIELD_TYPE = "shield"
+
+FIRE_TYPE = "fire"
+
+HAMMER_TYPE = "hammer"

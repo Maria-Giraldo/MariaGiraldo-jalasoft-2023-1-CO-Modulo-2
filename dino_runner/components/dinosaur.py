@@ -1,11 +1,11 @@
 import pygame
 from pygame.sprite import Sprite
 
-from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, RUNNING_SHIELD, JUMPING_SHIELD, DUCKING_SHIELD, DEFAULT_TYPE, SHIELD_TYPE
+from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, RUNNING_SHIELD, JUMPING_SHIELD, DUCKING_SHIELD, DEFAULT_TYPE, SHIELD_TYPE, FIRE_TYPE, RUNNING_FIRE, JUMPING_FIRE, DUCKING_FIRE, HAMMER_TYPE, DUCKING_HAMMER, RUNNING_HAMMER, JUMPING_HAMMER
 
-RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
-JUMP_IMG = {DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD}
-DUCK_IMG = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD}
+RUN_IMG = {DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD, FIRE_TYPE: RUNNING_FIRE, HAMMER_TYPE: RUNNING_HAMMER}
+JUMP_IMG = {DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD,FIRE_TYPE: JUMPING_FIRE, HAMMER_TYPE: JUMPING_HAMMER} 
+DUCK_IMG = {DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD, FIRE_TYPE: DUCKING_FIRE, HAMMER_TYPE: DUCKING_HAMMER}
 
 class Dinosaur(Sprite):
   X_POS = 80
@@ -36,9 +36,15 @@ class Dinosaur(Sprite):
       self.duck()   
       
     if user_input[pygame.K_UP] and not self.dino_jump:
+      if self.type == DEFAULT_TYPE:
+        pygame.mixer.music.load("dino_runner/assets/sounds/saltoSound.mp3")
+        pygame.mixer.music.play()
       self.dino_jump = True
       self.dino_run = False
     elif user_input[pygame.K_DOWN] and not self.dino_jump:
+      if self.type == DEFAULT_TYPE:
+        pygame.mixer.music.load("dino_runner/assets/sounds/soundDuck.mp3")
+        pygame.mixer.music.play()
       self.dino_jump = False
       self.dino_run = False
       self.dino_duck = True
@@ -76,6 +82,7 @@ class Dinosaur(Sprite):
   
   def draw(self, screen):
     screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
+
     
   def reset(self):
     self.dino_rect.x = self.X_POS
@@ -85,3 +92,4 @@ class Dinosaur(Sprite):
     self.dino_jump = False
     self.dino_duck = False
     self.jump_speed = self.JUMP_SPEED
+

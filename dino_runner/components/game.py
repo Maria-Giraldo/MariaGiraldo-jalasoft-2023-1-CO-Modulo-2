@@ -1,11 +1,12 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, ICON_FINAL
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.components.menu import Menu
 from dino_runner.components.counter import Counter
 from dino_runner.components.power_ups.power_up_manager import PowerUpManeger
+from dino_runner.components.lluvia_meteoritos import Player
 
 class Game:
     GAME_SPEED = 20
@@ -27,6 +28,7 @@ class Game:
         self.death_count = Counter()
         self.highest_score = Counter()
         self.power_up_manager = PowerUpManeger()
+        self.player_final = Player()
         
     def execute(self):
         self.running = True
@@ -45,20 +47,30 @@ class Game:
             self.update()
             self.draw()
 
+    def run_final(self):
+        self.playing = True
+        while self.playing:
+            self.events()
+            self.player_final.update()
+            self.player_final.draw()
+            
+
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
+
 
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.power_up_manager.update(self)
-        self.score.update()
+        self.score.update(self)
         self.update_game_speed()
 
     def draw(self):
+        
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255))
         self.draw_background()
@@ -78,27 +90,36 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+
         
     def show_menu(self):
         self.menu.reset_screen_color(self.screen)
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
         
-        if self.death_count.count == 0:
+        if self.death_count.count == 0 and self.score.count != 1000:
             self.menu.draw(self.screen, 'Press any key to start ...')
+        elif self.score.count == 500 and self.playing == False:
+                self.menu.draw(self.screen, "¡¡FELICIDADES, HAZ LLEGADO AL FINAL DEL JUEGO!!") 
+                self.menu.draw(self.screen, "Para ser campeon debes poder superar la lluvia de meteoritos", half_screen_width, 350) 
+                self.menu.draw(self.screen, "press any key to start", half_screen_width, 400)  
+                      
         else:
             self.update_highest_score()
             self.menu.draw(self.screen, 'Game over. Press any key to restart')
             self.menu.draw(self.screen, f'Your score: {self.score.count}', half_screen_width, 350, )
             self.menu.draw(self.screen, f'Highest score: {self.highest_score.count}', half_screen_width, 400, )
             self.menu.draw(self.screen, f'Total deaths: {self.death_count.count}', half_screen_width, 450, )
-        
-        self.screen.blit(ICON, (half_screen_width - 50, half_screen_height - 140))
+
+        if self.score.count == 1000:
+            self.screen.blit(ICON_FINAL, (half_screen_width - 150, half_screen_height - 250))    
+        else:
+            self.screen.blit(ICON, (half_screen_width - 50, half_screen_height - 140))    
         
         self.menu.update(self)
                 
     def update_game_speed(self):
-        if self.score.count % 100 == 0 and self.game_speed < 500:
+        if self.score.count % 200 == 0 and self.game_speed < 500:
             self.game_speed += 5
             
     def update_highest_score(self):
@@ -110,6 +131,8 @@ class Game:
         self.score.reset()
         self.game_speed = self.GAME_SPEED
         self.player.reset()
+        self.power_up_manager.reset_power_ups()
+
     
     def draw_power_up_time(self):
         if self.player.has_power_up:
@@ -119,3 +142,7 @@ class Game:
             else:
                 self.has_power_up = False
                 self.player.type = DEFAULT_TYPE
+
+
+
+

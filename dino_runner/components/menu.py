@@ -1,10 +1,12 @@
 import pygame
 
 from dino_runner.utils.constants import FONT_STYLE, SCREEN_HEIGHT, SCREEN_WIDTH
+from dino_runner.components.counter import Counter
 
 class Menu:
   HALF_SCREEN_HEIGHT = SCREEN_HEIGHT // 2
   HALF_SCREEN__WIDTH = SCREEN_WIDTH // 2
+  score = Counter()
         
   def __init__(self, screen):
     screen.fill((255, 255, 255))
@@ -12,21 +14,36 @@ class Menu:
     
   def update(self, game):
     pygame.display.update()
+    
     self.handle_events_on_menu(game)
+
+
     
   def handle_events_on_menu(self, game):
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         game.running = False
         game.playing = False
-      elif event.type == pygame.KEYDOWN:
+      elif event.type == pygame.KEYDOWN and self.score.count != 500:
         game.run()
-        
+      if event.type == pygame.KEYDOWN and self.score.count == 500:
+        game.run_final()
+  
+
+
+    
+   
   def reset_screen_color(self, screen):
-    screen.fill((255, 255, 255))
+      screen.fill((220, 225, 225))
     
   def draw(self, screen, message, x = HALF_SCREEN__WIDTH, y = HALF_SCREEN_HEIGHT):
     text = self.font.render(message, True, (0, 0, 0))
     text_rect = text.get_rect()
     text_rect.center = (x, y)
     screen.blit(text, text_rect)
+
+
+
+
+
+    
